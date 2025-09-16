@@ -20,7 +20,8 @@
     <h1 class="text-xl font-bold text-gray-200">Emmanuadi</h1>
 
     <!-- Desktop Menu -->
-    <nav class="hidden md:flex space-x-6 text-gray-200">
+    <nav class="hidden md:flex space-x-10 text-gray-200">
+      <a href="#intro" class="hover:text-indigo-400">Intro</a>
       <a href="#about" class="hover:text-indigo-400">About</a>
       <a href="#portfolio" class="hover:text-indigo-400">Work</a>
       <a href="#services" class="hover:text-indigo-400">Services</a>
@@ -31,7 +32,7 @@
     <!-- Mobile Toggle Button -->
     <button id="menu-btn" 
             class="md:hidden text-white focus:outline-none text-3xl">
-      ☰
+      &#9776;
     </button>
   </div>
 </div>
@@ -42,16 +43,15 @@
 
 <!-- Mobile Dropdown Menu -->
 <div id="menu" 
-     class="fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50">
-  <a href="#about" class="hover:text-indigo-400 text-lg">About</a>
-  <hr class="bg-white">
-  <a href="#portfolio" class="hover:text-indigo-400 text-lg">Work</a>
-  <hr>
-  <a href="#services" class="hover:text-indigo-400 text-lg">Services</a>
-  <hr>
-  <a href="#blog" class="hover:text-indigo-400 text-lg">Blog</a>
-  <hr>
-  <button id="close-btn" class="absolute top-6 right-6 text-2xl">✕</button>
+     class="fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
+  
+  <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Intro</a>
+  <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">About</a>
+  <a href="#portfolio" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Work</a>
+  <a href="#services" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Services</a>
+  <a href="#blog" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Blog</a>
+  
+  <button id="close-btn" class="absolute top-0 right-6 text-4xl">&times;</button>
 </div>
 
 <script>
@@ -63,6 +63,7 @@
   // Open menu
   menuBtn.addEventListener('click', () => {
     menu.classList.remove('-translate-y-full'); // slide down
+    menu.classList.add('translate-y-0');
     overlay.classList.remove('hidden');
   });
 
@@ -72,15 +73,29 @@
 
   function closeMenu() {
     menu.classList.add('-translate-y-full'); // slide back up
+    menu.classList.remove('translate-y-0');
     overlay.classList.add('hidden');
   }
+
+  // 👇 Close when a menu link is clicked
+  document.querySelectorAll('#menu a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // 👇 Auto-close when switching to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) { // Tailwind's md breakpoint
+      closeMenu();
+    }
+  });
 </script>
 
 
 
 
+
     <!-- Hero -->
-    <div class="py-20 text-center">
+    <div id="intro" class="py-20 text-center">
   <!-- Flex Container -->
   <div class="flex flex-col md:flex-row items-center justify-center gap-8">
     
@@ -260,7 +275,7 @@ bg-black text-white p-6 rounded shadow">
         >
       </p>
 
-        <form class="grid gap-4 max-w-md shadow-lg">
+        <form class="text-black grid gap-4 max-w-md shadow-lg">
         <input
           type="text"
           placeholder="Your Name"
