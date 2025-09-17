@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+      <link href="./output.css" rel="stylesheet">
+
+  </head>
+  <body class="bg-gray-50 text-gray-800 font-sans">
+        <section class="text-white py-25 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
+
+
+    
+<!-- Navigation bar -->
+<div class="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-90">
+  <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
+    <!-- Logo -->
+    <h1 class="text-xl font-bold text-gray-200">Emmanuadi</h1>
+
+    <!-- Desktop Menu -->
+    <nav class="hidden md:flex space-x-10 text-gray-200">
+      <a href="#intro" class="hover:text-indigo-400">Intro</a>
+      <a href="#about" class="hover:text-indigo-400">About</a>
+      <a href="#portfolio" class="hover:text-indigo-400">Work</a>
+      <a href="#services" class="hover:text-indigo-400">Services</a>
+      <a href="#blog" class="hover:text-indigo-400">Blog</a>
+      <a href="#contact" class="hover:text-indigo-400">Contact</a>
+    </nav>
+
+    <!-- Mobile Toggle Button -->
+    <button id="menu-btn" 
+            class="md:hidden text-white focus:outline-none text-3xl">
+      &#9776;
+    </button>
+  </div>
+</div>
+
+<!-- Dark Overlay -->
+<div id="overlay" 
+     class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
+<!-- Mobile Dropdown Menu -->
+<div id="menu" 
+     class="fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
+  
+  <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Intro</a>
+  <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">About</a>
+  <a href="#portfolio" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Work</a>
+  <a href="#services" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Services</a>
+  <a href="#blog" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Blog</a>
+  
+  <button id="close-btn" class="absolute top-0 right-6 text-4xl">&times;</button>
+</div>
+
+<script>
+  const menuBtn = document.getElementById('menu-btn');
+  const closeBtn = document.getElementById('close-btn');
+  const menu = document.getElementById('menu');
+  const overlay = document.getElementById('overlay');
+
+  // Open menu
+  menuBtn.addEventListener('click', () => {
+    menu.classList.remove('-translate-y-full'); // slide down
+    menu.classList.add('translate-y-0');
+    overlay.classList.remove('hidden');
+  });
+
+  // Close menu
+  closeBtn.addEventListener('click', closeMenu);
+  overlay.addEventListener('click', closeMenu);
+
+  function closeMenu() {
+    menu.classList.add('-translate-y-full'); // slide back up
+    menu.classList.remove('translate-y-0');
+    overlay.classList.add('hidden');
+  }
+
+  // 👇 Close when a menu link is clicked
+  document.querySelectorAll('#menu a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+
+  // 👇 Auto-close when switching to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) { // Tailwind's md breakpoint
+      closeMenu();
+    }
+  });
+</script>
+
+
+
+
+
+    <!-- Hero -->
+    <div id="intro" class="py-20 text-center">
+  <!-- Flex Container -->
+  <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+    
+    <!-- Text Section -->
+    <div>
+      <p class="text-5xl font-bold text-pink-500">
+        🚀 Emmanuel Adi
+      </p>
+      <p class="text-2xl mt-4">
+        Software Developer | DevOps | Cloud Engineer
+      </p>
+    </div>
+
+    <!-- Profile Image -->
+    <img src="./images/profile.jpg" 
+         alt="Emmanuel Adi"
+         class="w-80 h-80 rounded-full object-cover  shadow-lg">
+  </div>
+
+  <!-- Call to Actions -->
+  <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+    <a href="#contact"
+       class="bg-white text-indigo-600 px-6 py-3 rounded-full font-semibold 
+              hover:bg-gray-100 border border-indigo-200">
+      Let’s Connect
+    </a>
+
+    <button type="submit"
+            class="bg-black text-white px-6 py-3 rounded-full font-semibold 
+                   hover:text-indigo-600 transition duration-300">
+      Join Newsletter
+    </button>
+  </div>
+</div>
+
+    </section>
+
+    <!-- About Me -->
+    <section id="about" class="bg-black text-gray-200 max-w-10xl mx-auto py-16 px-20">
+      <h2 class="text-3xl font-bold mb-6">About Me</h2>
+      <p class="text-lg leading-relaxed">
+I began my career as a registered nurse, spending over a decade delivering patient-centered care and leading health initiatives. While I found fulfillment in improving lives through healthcare, I also discovered a growing curiosity for technology and its potential to drive innovation. What started as an interest soon became a passion—the idea of building solutions that bridge healthcare and technology. With a commitment to lifelong learning, I transitioned into the tech industry, equipping myself with skills in software development, cloud, and DevOps. Today, I bring together the empathy and discipline of healthcare with the problem-solving mindset of technology, aspiring to create impactful solutions that make a difference.        </p>
+      <!-- <p>
+        I work with businesses to create stunning websites and apps with a
+        focus on responsive design, modern CSS, and pixel-perfect layouts.  
+      </p> -->
+    </section>
+
+    <!-- Portfolio -->
+    <section id="portfolio">
+      <div class="px-16 py-16 bg-blue-400">
+        <h2 class="text-3xl font-bold mb-6">Portfolio</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold">Project 1</h3>
+            <p class="text-sm text-gray-600">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold">Project 2</h3>
+            <p class="text-sm text-gray-600">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, modi perspiciatis molestias voluptatibus porro dolore doloremque non, laudantium voluptate dolorem reprehenderit cupiditate iure sint sit facere sunt impedit, possimus ipsum..
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold">Project 3</h3>
+            <p class="text-sm text-gray-600">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor adipisci, ipsam officia maiores, enim numquam id, minima reiciendis et eligendi obcaecati sint unde eveniet velit soluta eum qui doloremque dolores?
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="bg-blue-400 px-20 py-16">
+      <h2 class="text-3xl font-bold mb-6">Services</h2>
+      <ul class="grid md:grid-cols-3 gap-6">
+        <li class="bg-black
+bg-black text-white p-6 rounded shadow">
+          <h3 class="font-semibold">Service 1</h3>
+          <p class="text-sm text-gray-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore hic aperiam molestias blanditiis illo fugiat consectetur? Aut velit labore beatae, sed vero saepe cum hic. Beatae dolor recusandae modi dolores!
+          </p>
+        </li>
+        <li class="bg-black
+bg-black text-white p-6 rounded shadow">
+          <h3 class="font-semibold">Service 2</h3>
+          <p class="text-sm text-gray-400">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero officiis iure provident ducimus. Obcaecati, iusto? Dicta dolore explicabo distinctio laborum quisquam sunt deserunt quas a earum! Numquam libero perferendis quia!.
+          </p>
+        </li>
+        <li class="bg-black
+bg-black text-white p-6 rounded shadow">
+          <h3 class="font-semibold">Service 3</h3>
+          <p class="text-sm text-gray-400">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Modi necessitatibus aut ipsa assumenda ut quod eos sit est aliquid corporis in officia fugiat tempore, temporibus, labore exercitationem provident. Et, cum!.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="px-16 py-16 bg-gray-200">
+      <div class="px-4">
+        <h2 class="text-3xl font-bold mb-6">Testimonials</h2>
+        <div class="grid md:grid-cols-2 gap-6">
+          <blockquote class="bg-black text-white p-6 rounded shadow">
+            <p>
+              "This person was fantastic to work with – highly skilled and
+              professional!"
+            </p>
+            <footer class="mt-4 text-sm text-blue-200">Markitz Consult</footer>
+          </blockquote>
+          <blockquote class="bg-black text-white p-6 rounded shadow">
+            <p>
+              "Delivered above expectations and always on time. Highly
+              recommended."
+            </p>
+            <footer class="mt-4 text-sm text-blue-200">Marcus Vigils</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blog -->
+    <section id="blog" class="bg-indigo-300 py-16 px-16">
+      <h2 class="text-3xl font-bold mb-6">Blog</h2>
+      <div class="grid md:grid-cols-3 gap-6">
+        <article class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold">Blog Post 1</h3>
+          <p class="text-sm text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro blanditiis, adipisci vero sapiente voluptates numquam assumenda ratione vel id aspernatur quam iusto repudiandae nesciunt ex accusamus amet optio provident maxime!
+          </p>
+        </article>
+        <article class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold">Blog Post 2</h3>
+          <p class="text-sm text-gray-600">
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae maiores quam provident ipsam sed minus sit odit voluptatibus consequuntur quibusdam quaerat velit porro accusamus facere voluptatem, incidunt totam ullam consectetur.
+          </p>
+        </article>
+        <article class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold">Blog Post 3</h3>
+          <p class="text-sm text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sit rerum voluptatem repellat numquam atque in harum, adipisci reprehenderit itaque ipsam soluta neque fuga facere sequi magnam blanditiis expedita mollitia.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Resume Download -->
+    <section id="resume" class="py-16 bg-gray-200 text-center grid: grid-cols-2">
+        <span>
+            <a href="#0" class="inline-block border border-black border-2 text-black px-20 py-3 rounded font-semibold">Hire Me</a>
+        </span>
+        <span>
+            <a
+              href="https://drive.google.com/file/d/1FedPr1lOL-j3yWGv_iXQXH-mLaXNeiE-/view?usp=sharing"
+              class="inline-block bg-black text-white px-6 py-3 rounded font-semibold"
+              download
+              >Download My Resume
+        </a>
+        </span>
+      
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="bg-blue-800 text-white py-16 px-20">
+      <h2 class="text-3xl font-bold mb-6">Contact</h2>
+      <p class="mb-4">
+        Feel free to reach out via email:
+        <a
+          href="mailto:adiemmanuel10@gmail.com"
+          class="text-pink-200 font-semibold"
+          >adiemmanuel10@gmail.com</a
+        >
+      </p>
+
+        <form class="text-black grid gap-4 max-w-md shadow-lg">
+        <input
+          type="text"
+          placeholder="Your Name"
+          class="bg-white border p-2 rounded"
+          required
+        />
+        <input
+          type="email"
+          placeholder="Your Email"
+          class="bg-white border p-2 rounded"
+          required
+        />
+        <textarea
+          placeholder="Your Message"
+          class="bg-white border p-2 rounded"
+          rows="5"
+        ></textarea>
+        <button
+          type="submit"
+          class="bg-black text-white px-6 py-3 rounded-full font-semibold"
+        >
+          Send Message
+        </button>
+      </form>
+      
+    </section>
+
+    <!-- Social Links + Footer -->
+    <footer class="bg-gray-900 py-20 mt-10">
+      <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+        <div class="mb-4 md:mb-0 text-indigo-500"><span>© Copyright Emmanuadi 2025  |  Designed by </span>
+          <span><a class="text-gray-200" href="#0"> Emmanuel Adi</a></span>
+        </div>
+        <div class="space-x-4 text-3xl text-blue-400 transform transition duration-300 ease-in-out hover:translate-x-2">
+          <h4 class="text-gray-200 text-xl px-20">Connect With Me</h4>
+            <a href="https://www.facebook.com"class="hover:text-indigo-400"  aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://instagram.com/" class="hover:text-indigo-400" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/" class="hover:text-indigo-400" aria-label="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/" class="hover:text-indigo-400" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://www.whatsapp.com/+233266425838" class="hover:text-indigo-400" aria-label="whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          <a href="https://www.gitHub.com/adieddygit" class="hover:text-indigo-400"><i class="fa-brands fa-github" aria-label="github"></i></a>
+        </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
