@@ -10,13 +10,13 @@
 
   </head>
   <body class="bg-gray-50 text-gray-800 font-sans">
-<section class="text-white py-25 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
+<section class=" text-white py-25 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
     
 <!-- Navigation bar -->
 <div class="fixed top-0 left-0 w-full z-100 bg-black bg-opacity-90">
   <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
     <!-- Logo -->
-    <h1 class="text-xl font-bold text-gray-200">Emmanuadi</h1>
+    <h1 class="text-xl font-bold text-indigo-400">Emmanuadi</h1>
 
     <!-- Desktop Menu -->
     <nav class="hidden md:flex space-x-10 text-gray-200">
@@ -27,6 +27,18 @@
       <a href="#blog" class="hover:text-indigo-400">Blog</a>
       <a href="#contact" class="hover:text-indigo-400">Contact</a>
     </nav>
+
+    <div id="social" class="space-x-4 text-xl text-indigo-400 transform transition duration-300 ease-in-out hover:translate-x-2">
+            <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://twitter.com/" class="hover:text-indigo-400" aria-label="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/emmanuel-a-618594265" class="hover:text-indigo-400" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+        </div>
 
     <!-- Mobile Toggle Button -->
     <button id="menu-btn" 
@@ -43,19 +55,38 @@
 <!-- Mobile Dropdown Menu -->
 <div id="menu" 
      class="fixed top-10 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
-  
+
   <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Intro</a>
   <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">About</a>
-  <a href="#Work" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Work</a>
+  <a href="#portfolio" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Work</a>
   <a href="#services" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Services</a>
   <a href="#blog" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Blog</a>
   <a href="#contact" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Contact</a>
+  <div class="space-x-4 text-3xl text-indigo-400 transform transition duration-300 ease-in-out hover:translate-x-2">
+            <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+            </a>
+            <a href="https://instagram.com/emmanuadi" class="hover:text-indigo-400" aria-label="Instagram">
+                <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://twitter.com/" class="hover:text-indigo-400" aria-label="X (Twitter)">
+                <i class="fa-brands fa-x-twitter"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/emmanuel-a-618594265" class="hover:text-indigo-400" aria-label="LinkedIn">
+                <i class="fa-brands fa-linkedin"></i>
+            </a>
+            <a href="https://https://whatsapp.com/" class="hover:text-indigo-400" aria-label="whatsapp">
+                <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          <a href="https://www.gitHub.com/adieddygit" class="hover:text-indigo-400"><i class="fa-brands fa-github" aria-label="github"></i></a>
+        </div>
 </div>
 
 <script>
   const menuBtn = document.getElementById('menu-btn');
   const menu = document.getElementById('menu');
   const overlay = document.getElementById('overlay');
+  const social = document.getElementById('social');
 
   function toggleMenu() {
     const isOpen = menu.classList.contains('translate-y-0');
@@ -65,7 +96,7 @@
       menu.classList.add('-translate-y-full');
       menu.classList.remove('translate-y-0');
       overlay.classList.add('hidden');
-      menuBtn.innerHTML = "&#9776;"; // hamburger
+      menuBtn.innerHTML = "&#9776;"; menuBtn.style.color = '#818cf8' // hamburger
     } else {
       // Open
       menu.classList.remove('-translate-y-full');
@@ -73,7 +104,21 @@
       overlay.classList.remove('hidden');
       menuBtn.innerHTML = "✕"; // close (X)
     }
+
   }
+
+  // To remove social handles @ screen <= 768
+  function toggleSocial() {
+  if (window.innerWidth < 768) {
+    social.classList.add('hidden');
+  } else {
+    social.classList.remove('hidden');
+  }
+}
+
+window.addEventListener('resize', toggleSocial);
+toggleSocial(); // run once on page load
+
 
   menuBtn.addEventListener('click', toggleMenu);
   overlay.addEventListener('click', toggleMenu);
@@ -92,12 +137,51 @@
       menuBtn.innerHTML = "&#9776;";
     }
   });
+
+  const links = document.querySelectorAll("nav a");
+  links.forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add("text-indigo-400", "font-bold");
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section"); // all sections with IDs
+    const navLinks = document.querySelectorAll("nav a, #menu a");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Remove active styles from all links
+            navLinks.forEach((link) =>
+              link.classList.remove("text-indigo-400", "font-bold")
+            );
+
+            // Highlight the current section link
+            const activeLink = document.querySelector(
+              `a[href="#${entry.target.id}"]`
+            );
+            if (activeLink) {
+              activeLink.classList.add("text-indigo-400", "font-bold");
+            }
+          }
+        });
+      },
+      { threshold: 0.6 } // 60% of section visible = active
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  });
+
 </script>
 
 
 
     <!-- Hero -->
-    <div id="intro" class="py-20 text-center">
+    <section id="intro" class="min-h-screen py-20 text-center">
   <!-- Flex Container -->
   <div class="flex flex-col md:flex-row items-center justify-center gap-8">
     
@@ -131,21 +215,40 @@
       Join Newsletter
   </a>
   </div>
-</div>
+    </section>
 
     </section>
 
     <!-- About Me -->
-    <section id="about" class="bg-black text-gray-200 max-w-10xl mx-auto py-16 px-20">
+    <section id="about" class="min-h-screen bg-black text-gray-200 max-w-10xl mx-auto py-16 px-20">
       <h2 class="text-3xl font-bold mb-6">About Me</h2>
-      <p class="text-lg leading-relaxed font-sans">
+
+      <div class="flex flex-col md:flex-row gap-6 max-w-5xl mx-auto items-center">
+  
+  <!-- Text Block -->
+  <div class="md:w-2/3">
+    <p class="text-lg leading-loose tracking-wider font-sans ">
       I began my career as a registered nurse delivering patient-centered care and leading health initiatives. While I found fulfillment in improving lives through healthcare, I also discovered a growing curiosity for technology and its potential to drive innovation. What started as an interest soon became a passion—the idea of building solutions that bridge healthcare and technology. With a commitment to lifelong learning, I transitioned into the tech industry, equipping myself with skills in software development, cloud, and DevOps. Today, I bring together the empathy and discipline of healthcare with the problem-solving mindset of technology, aspiring to create impactful solutions that make a difference.
     </p>
+  </div>
+  
+  <!-- Video Block -->
+  <div class="md:w-1/3 grid items-center justify-center rounded-lg shadow font-bold gap-5">
+    <h3>My Elivator Pitch</h3>
+    <video class="w-full rounded" controls>
+      <source src="your-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
+
+</div>
+
+    
     </section>
 
     <!-- Portfolio -->
     <section id="portfolio">
-      <div class="px-16 py-16 bg-blue-400">
+      <div class="min-h-screen px-16 py-16 bg-blue-400">
         <h2 class="text-3xl font-bold mb-6">My Works</h2>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-white p-4 rounded shadow">
@@ -171,7 +274,7 @@
     </section>
 
     <!-- Services -->
-    <section id="services" class="bg-blue-400 px-20 py-16">
+    <section id="services" class="min-h-screen bg-blue-400 px-20 py-16">
       <h2 class="text-3xl font-bold mb-6">Services</h2>
       <ul class="grid md:grid-cols-3 gap-6">
         <li class="bg-black text-white p-6 rounded shadow">
@@ -196,7 +299,7 @@
     </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="px-16 py-16 bg-gray-200">
+    <section id="testimonials" class="min-h-screen px-16 py-16 bg-gray-200">
       <div class="px-4">
         <h2 class="text-3xl font-bold mb-6">Testimonials</h2>
         <div class="grid md:grid-cols-2 gap-6">
@@ -219,7 +322,7 @@
     </section>
 
     <!-- Blog -->
-    <section id="blog" class="bg-indigo-300 py-16 px-16">
+    <section id="blog" class="min-h-screen bg-indigo-300 py-16 px-16">
       <h2 class="text-3xl font-bold mb-6">Blog</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <article class="bg-white p-4 rounded shadow">
@@ -260,7 +363,7 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="bg-blue-800 text-white py-20 px-20">
+    <section id="contact" class="min-h-screen bg-blue-800 text-white py-16 px-20">
       <h2 class="text-3xl font-bold mb-6">Contact</h2>
       <p class="mb-4">
         Feel free to reach out via email:
@@ -299,7 +402,7 @@
     </section>
 
     <!-- Social Links + Footer -->
-    <footer class="bg-gray-900 py-20 mt-30">
+    <footer class="bg-gray-900 py-20 px-20">
       <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         <div class="mb-4 md:mb-0 text-indigo-500"><span>© Copyright Emmanuadi 2025  |  Designed by </span>
           <span><a class="text-gray-200" href="#0"> Emmanuel Adi</a></span>
