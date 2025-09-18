@@ -13,7 +13,7 @@
 <section class="text-white py-25 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
     
 <!-- Navigation bar -->
-<div class="fixed top-0 left-0 w-full z-50 bg-black bg-opacity-90">
+<div class="fixed top-0 left-0 w-full z-100 bg-black bg-opacity-90">
   <div class="max-w-6xl mx-auto px-4 flex justify-between items-center h-16">
     <!-- Logo -->
     <h1 class="text-xl font-bold text-gray-200">Emmanuadi</h1>
@@ -30,7 +30,7 @@
 
     <!-- Mobile Toggle Button -->
     <button id="menu-btn" 
-            class="md:hidden text-white focus:outline-none text-3xl">
+            class="md:hidden text-white focus:outline-none text-3xl" type="button1">
       &#9776;
     </button>
   </div>
@@ -42,7 +42,7 @@
 
 <!-- Mobile Dropdown Menu -->
 <div id="menu" 
-     class="fixed top-0 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
+     class="fixed top-10 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
   
   <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Intro</a>
   <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">About</a>
@@ -50,47 +50,49 @@
   <a href="#services" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Services</a>
   <a href="#blog" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Blog</a>
   <a href="#contact" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Contact</a>
-
-  <button id="close-btn" class="absolute top-0.5px right-6 text-4xl">&times;</button>
 </div>
 
 <script>
   const menuBtn = document.getElementById('menu-btn');
-  const closeBtn = document.getElementById('close-btn');
   const menu = document.getElementById('menu');
   const overlay = document.getElementById('overlay');
 
-  // Open menu
-  menuBtn.addEventListener('click', () => {
-    menu.classList.remove('-translate-y-full'); // slide down
-    menu.classList.add('translate-y-0');
-    overlay.classList.remove('hidden');
-  });
+  function toggleMenu() {
+    const isOpen = menu.classList.contains('translate-y-0');
 
-  // Close menu
-  closeBtn.addEventListener('click', closeMenu);
-  overlay.addEventListener('click', closeMenu);
-
-  function closeMenu() {
-    menu.classList.add('-translate-y-full'); // slide back up
-    menu.classList.remove('translate-y-0');
-    overlay.classList.add('hidden');
+    if (isOpen) {
+      // Close
+      menu.classList.add('-translate-y-full');
+      menu.classList.remove('translate-y-0');
+      overlay.classList.add('hidden');
+      menuBtn.innerHTML = "&#9776;"; // hamburger
+    } else {
+      // Open
+      menu.classList.remove('-translate-y-full');
+      menu.classList.add('translate-y-0');
+      overlay.classList.remove('hidden');
+      menuBtn.innerHTML = "✕"; // close (X)
+    }
   }
 
-  // 👇 Close when a menu link is clicked
+  menuBtn.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+
+  // Close when clicking a menu link
   document.querySelectorAll('#menu a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+    link.addEventListener('click', toggleMenu);
   });
 
-  // 👇 Auto-close when switching to desktop
+  // Auto-close when resizing to desktop
   window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) { // Tailwind's md breakpoint
-      closeMenu();
+    if (window.innerWidth >= 768) {
+      menu.classList.add('-translate-y-full');
+      menu.classList.remove('translate-y-0');
+      overlay.classList.add('hidden');
+      menuBtn.innerHTML = "&#9776;";
     }
   });
 </script>
-
-
 
 
 
@@ -304,19 +306,19 @@
         </div>
         <div class="space-x-4 text-3xl text-blue-400 transform transition duration-300 ease-in-out hover:translate-x-2">
           <h4 class="text-gray-200 text-xl px-20">Connect With Me</h4>
-            <a href="https://www.facebook.com"class="hover:text-indigo-400"  aria-label="Facebook">
+            <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
                 <i class="fa-brands fa-facebook"></i>
             </a>
-            <a href="https://instagram.com/" class="hover:text-indigo-400" aria-label="Instagram">
+            <a href="https://instagram.com/emmanuadi" class="hover:text-indigo-400" aria-label="Instagram">
                 <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://twitter.com/" class="hover:text-indigo-400" aria-label="X (Twitter)">
                 <i class="fa-brands fa-x-twitter"></i>
             </a>
-            <a href="https://www.linkedin.com/" class="hover:text-indigo-400" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/emmanuel-a-618594265" class="hover:text-indigo-400" aria-label="LinkedIn">
                 <i class="fa-brands fa-linkedin"></i>
             </a>
-            <a href="https://www.whatsapp.com/+233266425838" class="hover:text-indigo-400" aria-label="whatsapp">
+            <a href="https://https://whatsapp.com/" class="hover:text-indigo-400" aria-label="whatsapp">
                 <i class="fa-brands fa-whatsapp"></i>
             </a>
           <a href="https://www.gitHub.com/adieddygit" class="hover:text-indigo-400"><i class="fa-brands fa-github" aria-label="github"></i></a>
