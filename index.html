@@ -10,6 +10,7 @@
 
   </head>
   <body class="bg-gray-50 text-gray-800 font-sans">
+    <html lang="en" class="scroll-smooth">
 <section class=" text-white py-25 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
     
 <!-- Navigation bar -->
@@ -20,12 +21,12 @@
 
     <!-- Desktop Menu -->
     <nav class="hidden md:flex space-x-10 text-gray-200">
-      <a href="#intro" class="hover:text-indigo-400">Intro</a>
-      <a href="#about" class="hover:text-indigo-400">About</a>
-      <a href="#portfolio" class="hover:text-indigo-400">Work</a>
-      <a href="#services" class="hover:text-indigo-400">Services</a>
-      <a href="#blog" class="hover:text-indigo-400">Blog</a>
-      <a href="#contact" class="hover:text-indigo-400">Contact</a>
+      <a href="#intro" class="hover:text-indigo-400 transition-colors duration-300">Intro</a>
+      <a href="#about" class="hover:text-indigo-400 transition-colors duration-300">About</a>
+      <a href="#portfolio" class="hover:text-indigo-400 transition-colors duration-300">Work</a>
+      <a href="#services" class="hover:text-indigo-400 transition-colors duration-300">Services</a>
+      <a href="#blog" class="hover:text-indigo-400 transition-colors duration-300">Blog</a>
+      <a href="#contact" class="hover:text-indigo-400 transition-colors duration-300">Contact</a>
     </nav>
 
     <div id="social" class="space-x-4 text-xl text-indigo-400 transform transition duration-300 ease-in-out hover:translate-x-2">
@@ -54,14 +55,14 @@
 
 <!-- Mobile Dropdown Menu -->
 <div id="menu" 
-     class="fixed top-10 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-300 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
+     class="fixed top-10 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-500 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
 
-  <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Intro</a>
-  <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">About</a>
-  <a href="#portfolio" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Work</a>
-  <a href="#services" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Services</a>
-  <a href="#blog" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Blog</a>
-  <a href="#contact" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left">Contact</a>
+  <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Intro</a>
+  <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">About</a>
+  <a href="#portfolio" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Work</a>
+  <a href="#services" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Services</a>
+  <a href="#blog" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Blog</a>
+  <a href="#contact" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Contact</a>
   <div class="space-x-4 text-3xl text-indigo-400 transform transition duration-300 ease-in-out hover:translate-x-2">
             <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
                 <i class="fa-brands fa-facebook"></i>
@@ -165,7 +166,7 @@ toggleSocial(); // run once on page load
               `a[href="#${entry.target.id}"]`
             );
             if (activeLink) {
-              activeLink.classList.add("text-indigo-400", "font-bold");
+              activeLink.classList.add("text-indigo-400");
             }
           }
         });
@@ -178,6 +179,94 @@ toggleSocial(); // run once on page load
 
 </script>
 
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Find all sections that have an id
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  // Mobile menu links (your dropdown has id="menu")
+  const mobileLinks = Array.from(document.querySelectorAll("#menu a"));
+
+  // quick safety checks
+  if (!sections.length) {
+    console.warn("Scrollspy: no <section id='...'> elements found.");
+    return;
+  }
+  if (!mobileLinks.length) {
+    console.warn("Scrollspy: no mobile links found (#menu a).");
+    return;
+  }
+
+  let observer = null;
+
+  function createObserver() {
+    // disconnect previous observer if any
+    if (observer) observer.disconnect();
+
+    // try to account for a fixed header height (so section detection ignores header overlay)
+    const header = document.querySelector(".fixed, header"); // best-effort
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+    const options = {
+      root: null,
+      // shift top boundary down by headerHeight so the section's top under the header counts correctly
+      rootMargin: `-${headerHeight}px 0px -40% 0px`,
+      threshold: [0.25, 0.5, 0.75]
+    };
+
+    observer = new IntersectionObserver((entries) => {
+      // Only consider entries that are intersecting
+      const visible = entries.filter(e => e.isIntersecting);
+      if (visible.length === 0) return;
+
+      // pick the entry with the largest intersectionRatio (most visible)
+      visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      const topEntry = visible[0];
+      const id = topEntry.target.id;
+
+      // update mobile menu links
+      mobileLinks.forEach(link => {
+        const href = link.getAttribute("href");
+        if (!href) return;
+        if (href === `#${id}`) {
+          link.classList.add("text-indigo-400");
+        } else {
+          link.classList.remove("text-indigo-400");
+        }
+      });
+
+    }, options);
+
+    // observe each section
+    sections.forEach(s => observer.observe(s));
+  }
+
+  function enableScrollspyIfMobile() {
+    // disconnect if desktop
+    if (window.innerWidth > 768) {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      // remove mobile-only active classes (so desktop is unaffected)
+      mobileLinks.forEach(link => link.classList.remove("text-indigo-400"));
+      return;
+    }
+
+    // create observer for mobile
+    createObserver();
+  }
+
+  // run on load
+  enableScrollspyIfMobile();
+
+  // handle resizes (debounced)
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(enableScrollspyIfMobile, 150);
+  });
+});
+</script>
 
 
     <!-- Hero -->
@@ -243,12 +332,26 @@ toggleSocial(); // run once on page load
 
 </div>
 
-    
+      <div id="resume" class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
+        <span class="">
+            <a href="#0" class="inline-block border-white border-2 text-white px-20 py-2.5 rounded font-sans hover:bg-white hover:text-black">HIRE ME</a>
+        </span>
+        <span class="">
+            <a
+              href="https://drive.google.com/file/d/1FedPr1lOL-j3yWGv_iXQXH-mLaXNeiE-/view?usp=sharing"
+              class="inline-block bg-white text-black px-6 py-3 rounded font-sans hover:bg-indigo-500 hover:text-indigo-100"
+              download
+              >DOWNLOAD RESUME
+            </a>
+        </span>
+      
+      </div>
+
     </section>
 
     <!-- Portfolio -->
-    <section id="portfolio">
-      <div class="min-h-screen px-16 py-16 bg-blue-400">
+    <section id="portfolio" class="min-h-screen px-16 py-20 bg-indigo-100">
+      <div >
         <h2 class="text-3xl font-bold mb-6">My Works</h2>
         <div class="grid md:grid-cols-3 gap-6">
           <div class="bg-white p-4 rounded shadow">
@@ -260,21 +363,39 @@ toggleSocial(); // run once on page load
           <div class="bg-white p-4 rounded shadow">
             <h3 class="font-semibold">Project 2</h3>
             <p class="text-sm text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, modi perspiciatis molestias voluptatibus porro dolore doloremque non, laudantium voluptate dolorem reprehenderit cupiditate iure sint sit facere sunt impedit, possimus ipsum..
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
             </p>
           </div>
           <div class="bg-white p-4 rounded shadow">
             <h3 class="font-semibold">Project 3</h3>
             <p class="text-sm text-gray-600">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold">Project 4</h3>
+            <p class="text-sm text-gray-600">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold">Project 5</h3>
+            <p class="text-sm text-gray-600">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, modi perspiciatis molestias voluptatibus porro dolore doloremque non, laudantium voluptate dolorem reprehenderit cupiditate iure sint sit facere sunt impedit, possimus ipsum..
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded shadow">
+            <h3 class="font-semibold">Project 6</h3>
+            <p class="text-sm text-gray-600">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor adipisci, ipsam officia maiores, enim numquam id, minima reiciendis et eligendi obcaecati sint unde eveniet velit soluta eum qui doloremque dolores?
             </p>
           </div>
         </div>
-      </div>
     </section>
 
-    <!-- Services -->
     <section id="services" class="min-h-screen bg-blue-400 px-20 py-16">
+
+      <!-- Services -->
       <h2 class="text-3xl font-bold mb-6">Services</h2>
       <ul class="grid md:grid-cols-3 gap-6">
         <li class="bg-black text-white p-6 rounded shadow">
@@ -296,11 +417,9 @@ toggleSocial(); // run once on page load
           </p>
         </li>
       </ul>
-    </section>
 
     <!-- Testimonials -->
-    <section id="testimonials" class="min-h-screen px-16 py-16 bg-gray-200">
-      <div class="px-4">
+      <div class="py-16">
         <h2 class="text-3xl font-bold mb-6">Testimonials</h2>
         <div class="grid md:grid-cols-2 gap-6">
           <blockquote class="bg-black text-white p-6 rounded shadow">
@@ -322,7 +441,7 @@ toggleSocial(); // run once on page load
     </section>
 
     <!-- Blog -->
-    <section id="blog" class="min-h-screen bg-indigo-300 py-16 px-16">
+    <section id="blog" class="min-h-screen bg-indigo-100 py-16 px-16">
       <h2 class="text-3xl font-bold mb-6">Blog</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <article class="bg-white p-4 rounded shadow">
@@ -343,23 +462,25 @@ toggleSocial(); // run once on page load
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sit rerum voluptatem repellat numquam atque in harum, adipisci reprehenderit itaque ipsam soluta neque fuga facere sequi magnam blanditiis expedita mollitia.
           </p>
         </article>
+        <article class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold">Blog Post 4</h3>
+          <p class="text-sm text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sit rerum voluptatem repellat numquam atque in harum, adipisci reprehenderit itaque ipsam soluta neque fuga facere sequi magnam blanditiis expedita mollitia.
+          </p>
+        </article>
+        <article class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold">Blog Post 5</h3>
+          <p class="text-sm text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sit rerum voluptatem repellat numquam atque in harum, adipisci reprehenderit itaque ipsam soluta neque fuga facere sequi magnam blanditiis expedita mollitia.
+          </p>
+        </article>
+        <article class="bg-white p-4 rounded shadow">
+          <h3 class="font-semibold">Blog Post 6</h3>
+          <p class="text-sm text-gray-600">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quo sit rerum voluptatem repellat numquam atque in harum, adipisci reprehenderit itaque ipsam soluta neque fuga facere sequi magnam blanditiis expedita mollitia.
+          </p>
+        </article>
       </div>
-    </section>
-
-    <!-- Resume Download -->
-    <section id="resume" class="py-16 bg-gray-200 text-center grid: grid-cols-2">
-        <span>
-            <a href="#0" class="inline-block border-black border-2 text-black px-20 py-2.5 rounded font-sans hover:bg-black hover:text-white">HIRE ME</a>
-        </span>
-        <span>
-            <a
-              href="https://drive.google.com/file/d/1FedPr1lOL-j3yWGv_iXQXH-mLaXNeiE-/view?usp=sharing"
-              class="inline-block bg-black text-white px-6 py-3 rounded font-sans hover:bg-indigo-500 hover:text-indigo-100"
-              download
-              >DOWNLOAD RESUME
-        </a>
-        </span>
-      
     </section>
 
     <!-- Contact -->
