@@ -11,7 +11,7 @@
   </head>
   <body class="bg-gray-50 text-gray-800 font-sans">
     <html lang="en" class="scroll-smooth">
-<section class=" text-white py-25 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
+<section class=" text-white py-16 text-center bg-black bg-opacity-100 p-8 bg-cover bg-no-repeat" style="background-image: url('./images/hero-image.png');">
     
 <!-- Navigation bar -->
 <div class="fixed top-0 left-0 w-full z-100 bg-black bg-opacity-90">
@@ -20,7 +20,7 @@
     <h1 class="text-xl font-bold text-indigo-400">Emmanuadi</h1>
 
     <!-- Desktop Menu -->
-    <nav class="hidden md:flex space-x-10 text-gray-200">
+    <nav class="hidden md:flex space-x-10 text-gray-500">
       <a href="#intro" class="hover:text-indigo-400 transition-colors duration-300">Intro</a>
       <a href="#about" class="hover:text-indigo-400 transition-colors duration-300">About</a>
       <a href="#portfolio" class="hover:text-indigo-400 transition-colors duration-300">Work</a>
@@ -55,7 +55,7 @@
 
 <!-- Mobile Dropdown Menu -->
 <div id="menu" 
-     class="fixed top-10 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-500 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
+     class="fixed top-10 left-0 w-full text-gray-500 bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-500 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
 
   <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Intro</a>
   <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">About</a>
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     <!-- Hero -->
-    <section id="intro" class="min-h-screen py-20 text-center">
+    <section id="intro" class="py-16 text-center">
   <!-- Flex Container -->
   <div class="flex flex-col md:flex-row items-center justify-center gap-8">
     
@@ -309,7 +309,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- About Me -->
-    <section id="about" class="min-h-screen bg-black text-gray-200 max-w-10xl mx-auto py-16 px-20">
+    <section id="about" class=" bg-black text-gray-200 max-w-10xl mx-auto py-16 px-20">
       <h2 class="text-3xl font-bold mb-6">About Me</h2>
 
       <div class="flex flex-col md:flex-row gap-6 max-w-5xl mx-auto items-center">
@@ -334,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div id="resume" class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
         <span class="">
-            <a href="#0" class="inline-block border-white border-2 text-white px-20 py-2.5 rounded font-sans hover:bg-white hover:text-black">HIRE ME</a>
+            <a href="#0" class="inline-block border-white border-2 text-white px-16 py-2.5 rounded font-sans hover:bg-white hover:text-black">HIRE ME</a>
         </span>
         <span class="">
             <a
@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Portfolio -->
-    <section id="portfolio" class="min-h-screen px-16 py-20 bg-indigo-100">
+    <section id="portfolio" class="px-16 py-20 bg-indigo-100">
       <div >
         <h2 class="text-3xl font-bold mb-6">My Works</h2>
         <div class="grid md:grid-cols-3 gap-6">
@@ -393,7 +393,7 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </section>
 
-    <section id="services" class="min-h-screen bg-blue-400 px-20 py-16">
+    <section id="services" class=" bg-blue-400 px-20 py-16">
 
       <!-- Services -->
       <h2 class="text-3xl font-bold mb-6">Services</h2>
@@ -441,7 +441,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Blog -->
-    <section id="blog" class="min-h-screen bg-indigo-100 py-16 px-16">
+    <section id="blog" class="bg-indigo-100 py-16 px-16">
       <h2 class="text-3xl font-bold mb-6">Blog</h2>
       <div class="grid md:grid-cols-3 gap-6">
         <article class="bg-white p-4 rounded shadow">
@@ -484,7 +484,7 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="min-h-screen bg-blue-800 text-white py-16 px-20">
+    <section id="contact" class=" bg-blue-800 text-white py-10 px-20">
       <h2 class="text-3xl font-bold mb-6">Contact</h2>
       <p class="mb-4">
         Feel free to reach out via email:
@@ -523,13 +523,14 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Social Links + Footer -->
-    <footer class="bg-gray-900 py-20 px-20">
-      <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
-        <div class="mb-4 md:mb-0 text-indigo-500"><span>© Copyright Emmanuadi 2025  |  Designed by </span>
+    <footer class="bg-gray-900 py-16 px-20">
+      <div class="max-w-6xl mx-auto ">
+        <div class="mb-4 md:mb-0 text-indigo-500"><span>&copy; Copyright Emmanuadi 2025  |  Designed by </span>
           <span><a class="text-gray-200" href="#0"> Emmanuel Adi</a></span>
         </div>
-        <div class="space-x-4 text-3xl text-blue-400 transform transition duration-300 ease-in-out hover:translate-x-2">
-          <h4 class="text-gray-200 text-xl px-20">Connect With Me</h4>
+
+        <div class="space-x-3 text-2xl px-16 text-blue-400 transform transition duration-300 ease-in-out hover:translate-x-2 mt-8 text-center py-10 space-y">
+          <h4 class="text-gray-200 text-center text-xl">Connect on</h4>
             <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
                 <i class="fa-brands fa-facebook"></i>
             </a>
