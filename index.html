@@ -20,7 +20,7 @@
     <h1 class="text-xl font-bold text-indigo-400">Emmanuadi</h1>
 
     <!-- Desktop Menu -->
-    <nav class="hidden md:flex space-x-10 text-gray-500">
+    <nav class="hidden md:flex space-x-10 text-gray-200">
       <a href="#intro" class="hover:text-indigo-400 transition-colors duration-300">Intro</a>
       <a href="#about" class="hover:text-indigo-400 transition-colors duration-300">About</a>
       <a href="#portfolio" class="hover:text-indigo-400 transition-colors duration-300">Work</a>
@@ -55,7 +55,7 @@
 
 <!-- Mobile Dropdown Menu -->
 <div id="menu" 
-     class="fixed top-10 left-0 w-full text-gray-500 bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-500 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
+     class="fixed top-10 left-0 w-full bg-black bg-opacity-90 shadow-lg transform -translate-y-full transition-transform duration-500 ease-in-out flex flex-col items-center py-10 space-y-6 z-50 divide-y divide-gray-900">
 
   <a href="#intro" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">Intro</a>
   <a href="#about" class="hover:text-indigo-400 text-lg px-4 py-2 w-full text-left transition-colors duration-300">About</a>
@@ -66,9 +66,6 @@
   <div class="space-x-4 text-3xl text-indigo-400 transform transition duration-300 ease-in-out hover:translate-x-2">
             <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
                 <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://instagram.com/emmanuadi" class="hover:text-indigo-400" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
             </a>
             <a href="https://twitter.com/" class="hover:text-indigo-400" aria-label="X (Twitter)">
                 <i class="fa-brands fa-x-twitter"></i>
@@ -82,192 +79,6 @@
           <a href="https://www.gitHub.com/adieddygit" class="hover:text-indigo-400"><i class="fa-brands fa-github" aria-label="github"></i></a>
         </div>
 </div>
-
-<script>
-  const menuBtn = document.getElementById('menu-btn');
-  const menu = document.getElementById('menu');
-  const overlay = document.getElementById('overlay');
-  const social = document.getElementById('social');
-
-  function toggleMenu() {
-    const isOpen = menu.classList.contains('translate-y-0');
-
-    if (isOpen) {
-      // Close
-      menu.classList.add('-translate-y-full');
-      menu.classList.remove('translate-y-0');
-      overlay.classList.add('hidden');
-      menuBtn.innerHTML = "&#9776;"; menuBtn.style.color = '#818cf8' // hamburger
-    } else {
-      // Open
-      menu.classList.remove('-translate-y-full');
-      menu.classList.add('translate-y-0');
-      overlay.classList.remove('hidden');
-      menuBtn.innerHTML = "✕"; // close (X)
-    }
-
-  }
-
-  // To remove social handles @ screen <= 768
-  function toggleSocial() {
-  if (window.innerWidth < 768) {
-    social.classList.add('hidden');
-  } else {
-    social.classList.remove('hidden');
-  }
-}
-
-window.addEventListener('resize', toggleSocial);
-toggleSocial(); // run once on page load
-
-
-  menuBtn.addEventListener('click', toggleMenu);
-  overlay.addEventListener('click', toggleMenu);
-
-  // Close when clicking a menu link
-  document.querySelectorAll('#menu a').forEach(link => {
-    link.addEventListener('click', toggleMenu);
-  });
-
-  // Auto-close when resizing to desktop
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 768) {
-      menu.classList.add('-translate-y-full');
-      menu.classList.remove('translate-y-0');
-      overlay.classList.add('hidden');
-      menuBtn.innerHTML = "&#9776;";
-    }
-  });
-
-  const links = document.querySelectorAll("nav a");
-  links.forEach(link => {
-    if (link.href === window.location.href) {
-      link.classList.add("text-indigo-400", "font-bold");
-    }
-  });
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll("section"); // all sections with IDs
-    const navLinks = document.querySelectorAll("nav a, #menu a");
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            // Remove active styles from all links
-            navLinks.forEach((link) =>
-              link.classList.remove("text-indigo-400", "font-bold")
-            );
-
-            // Highlight the current section link
-            const activeLink = document.querySelector(
-              `a[href="#${entry.target.id}"]`
-            );
-            if (activeLink) {
-              activeLink.classList.add("text-indigo-400");
-            }
-          }
-        });
-      },
-      { threshold: 0.6 } // 60% of section visible = active
-    );
-
-    sections.forEach((section) => observer.observe(section));
-  });
-
-</script>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Find all sections that have an id
-  const sections = Array.from(document.querySelectorAll("section[id]"));
-  // Mobile menu links (your dropdown has id="menu")
-  const mobileLinks = Array.from(document.querySelectorAll("#menu a"));
-
-  // quick safety checks
-  if (!sections.length) {
-    console.warn("Scrollspy: no <section id='...'> elements found.");
-    return;
-  }
-  if (!mobileLinks.length) {
-    console.warn("Scrollspy: no mobile links found (#menu a).");
-    return;
-  }
-
-  let observer = null;
-
-  function createObserver() {
-    // disconnect previous observer if any
-    if (observer) observer.disconnect();
-
-    // try to account for a fixed header height (so section detection ignores header overlay)
-    const header = document.querySelector(".fixed, header"); // best-effort
-    const headerHeight = header ? header.getBoundingClientRect().height : 0;
-
-    const options = {
-      root: null,
-      // shift top boundary down by headerHeight so the section's top under the header counts correctly
-      rootMargin: `-${headerHeight}px 0px -40% 0px`,
-      threshold: [0.25, 0.5, 0.75]
-    };
-
-    observer = new IntersectionObserver((entries) => {
-      // Only consider entries that are intersecting
-      const visible = entries.filter(e => e.isIntersecting);
-      if (visible.length === 0) return;
-
-      // pick the entry with the largest intersectionRatio (most visible)
-      visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-      const topEntry = visible[0];
-      const id = topEntry.target.id;
-
-      // update mobile menu links
-      mobileLinks.forEach(link => {
-        const href = link.getAttribute("href");
-        if (!href) return;
-        if (href === `#${id}`) {
-          link.classList.add("text-indigo-400");
-        } else {
-          link.classList.remove("text-indigo-400");
-        }
-      });
-
-    }, options);
-
-    // observe each section
-    sections.forEach(s => observer.observe(s));
-  }
-
-  function enableScrollspyIfMobile() {
-    // disconnect if desktop
-    if (window.innerWidth > 768) {
-      if (observer) {
-        observer.disconnect();
-        observer = null;
-      }
-      // remove mobile-only active classes (so desktop is unaffected)
-      mobileLinks.forEach(link => link.classList.remove("text-indigo-400"));
-      return;
-    }
-
-    // create observer for mobile
-    createObserver();
-  }
-
-  // run on load
-  enableScrollspyIfMobile();
-
-  // handle resizes (debounced)
-  let resizeTimer;
-  window.addEventListener("resize", () => {
-    clearTimeout(resizeTimer);
-    resizeTimer = setTimeout(enableScrollspyIfMobile, 150);
-  });
-});
-</script>
-
 
     <!-- Hero -->
     <section id="intro" class="py-16 text-center">
@@ -334,7 +145,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <div id="resume" class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-5">
         <span class="">
-            <a href="#0" class="inline-block border-white border-2 text-white px-16 py-2.5 rounded font-sans hover:bg-white hover:text-black">HIRE ME</a>
+            <a href="#0" class="inline-block border-white border-2 text-white px-20 py-2.5 rounded font-sans hover:bg-white hover:text-black">HIRE ME</a>
         </span>
         <span class="">
             <a
@@ -523,33 +334,202 @@ document.addEventListener("DOMContentLoaded", () => {
     </section>
 
     <!-- Social Links + Footer -->
-    <footer class="bg-gray-900 py-16 px-20">
-      <div class="max-w-6xl mx-auto ">
-        <div class="mb-4 md:mb-0 text-indigo-500"><span>&copy; Copyright Emmanuadi 2025  |  Designed by </span>
-          <span><a class="text-gray-200" href="#0"> Emmanuel Adi</a></span>
-        </div>
+    <footer class="bg-gray-900 py-12 px-6 sm:px-10 md:px-20 text-center">
+  <div class="text-indigo-500 mb-6">&copy; Copyright Emmanuadi 2025 | Designed by <span class="text-gray-200">Emmanuel Adi</span></div>
+  <div class="flex justify-center space-x-4 text-2xl text-blue-400">
+    <a href="https://www.facebook.com/adieddygh"><i class="fa-brands fa-facebook"></i></a>
+    <a href="https://twitter.com/"><i class="fa-brands fa-x-twitter"></i></a>
+    <a href="https://www.linkedin.com/in/emmanuel-a-618594265"><i class="fa-brands fa-linkedin"></i></a>
+    <a href="https://whatsapp.com/"><i class="fa-brands fa-whatsapp"></i></a>
+    <a href="https://www.gitHub.com/adieddygit"><i class="fa-brands fa-github"></i></a>
+  </div>
+</footer>
 
-        <div class="space-x-3 text-2xl px-16 text-blue-400 transform transition duration-300 ease-in-out hover:translate-x-2 mt-8 text-center py-10 space-y">
-          <h4 class="text-gray-200 text-center text-xl">Connect on</h4>
-            <a href="https://www.facebook.com/adieddygh"class="hover:text-indigo-400"  aria-label="Facebook">
-                <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://instagram.com/emmanuadi" class="hover:text-indigo-400" aria-label="Instagram">
-                <i class="fa-brands fa-instagram"></i>
-            </a>
-            <a href="https://twitter.com/" class="hover:text-indigo-400" aria-label="X (Twitter)">
-                <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://www.linkedin.com/in/emmanuel-a-618594265" class="hover:text-indigo-400" aria-label="LinkedIn">
-                <i class="fa-brands fa-linkedin"></i>
-            </a>
-            <a href="https://https://whatsapp.com/" class="hover:text-indigo-400" aria-label="whatsapp">
-                <i class="fa-brands fa-whatsapp"></i>
-            </a>
-          <a href="https://www.gitHub.com/adieddygit" class="hover:text-indigo-400"><i class="fa-brands fa-github" aria-label="github"></i></a>
-        </div>
-        </div>
-      </div>
-    </footer>
   </body>
+
+  <script>
+  const menuBtn = document.getElementById('menu-btn');
+  const menu = document.getElementById('menu');
+  const overlay = document.getElementById('overlay');
+  const social = document.getElementById('social');
+
+  function toggleMenu() {
+    const isOpen = menu.classList.contains('translate-y-0');
+
+    if (isOpen) {
+      // Close
+      menu.classList.add('-translate-y-full');
+      menu.classList.remove('translate-y-0');
+      overlay.classList.add('hidden');
+      menuBtn.innerHTML = "&#9776;"; menuBtn.style.color = '#818cf8' // hamburger
+    } else {
+      // Open
+      menu.classList.remove('-translate-y-full');
+      menu.classList.add('translate-y-0');
+      overlay.classList.remove('hidden');
+      menuBtn.innerHTML = "✕"; // close (X)
+    }
+
+  }
+
+  // To remove social handles @ screen <= 768
+  function toggleSocial() {
+  if (window.innerWidth < 768) {
+    social.classList.add('hidden');
+  } else {
+    social.classList.remove('hidden');
+  }
+}
+
+window.addEventListener('resize', toggleSocial);
+toggleSocial(); // run once on page load
+
+
+  menuBtn.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+
+  // Close when clicking a menu link
+  document.querySelectorAll('#menu a').forEach(link => {
+    link.addEventListener('click', toggleMenu);
+  });
+
+  // Auto-close when resizing to desktop
+  window.addEventListener('resize', () => {
+    if (window.innerWidth >= 768) {
+      menu.classList.add('-translate-y-full');
+      menu.classList.remove('translate-y-0');
+      overlay.classList.add('hidden');
+      menuBtn.innerHTML = "&#9776;";
+    }
+  });
+
+  const links = document.querySelectorAll("nav a");
+  links.forEach(link => {
+    if (link.href === window.location.href) {
+      link.classList.add("text-indigo-400", "font-bold");
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const sections = document.querySelectorAll("section"); // all sections with IDs
+    const navLinks = document.querySelectorAll("nav a, #menu a");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            // Remove active styles from all links
+            navLinks.forEach((link) =>
+              link.classList.remove("text-indigo-400", "font-bold")
+            );
+
+            // Highlight the current section link
+            const activeLink = document.querySelector(
+              `a[href="#${entry.target.id}"]`
+            );
+            if (activeLink) {
+              activeLink.classList.add("text-indigo-400");
+            }
+          }
+        });
+      },
+      { threshold: 0.6 } // 60% of section visible = active
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  });
+
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Find all sections that have an id
+  const sections = Array.from(document.querySelectorAll("section[id]"));
+  // Mobile menu links (your dropdown has id="menu")
+  const mobileLinks = Array.from(document.querySelectorAll("#menu a"));
+
+  // quick safety checks
+  if (!sections.length) {
+    console.warn("Scrollspy: no <section id='...'> elements found.");
+    return;
+  }
+  if (!mobileLinks.length) {
+    console.warn("Scrollspy: no mobile links found (#menu a).");
+    return;
+  }
+
+  let observer = null;
+
+  function createObserver() {
+    // disconnect previous observer if any
+    if (observer) observer.disconnect();
+
+    // try to account for a fixed header height (so section detection ignores header overlay)
+    const header = document.querySelector(".fixed, header"); // best-effort
+    const headerHeight = header ? header.getBoundingClientRect().height : 0;
+
+    const options = {
+      root: null,
+      // shift top boundary down by headerHeight so the section's top under the header counts correctly
+      rootMargin: `-${headerHeight}px 0px -40% 0px`,
+      threshold: [0.25, 0.5, 0.75]
+    };
+
+    observer = new IntersectionObserver((entries) => {
+      // Only consider entries that are intersecting
+      const visible = entries.filter(e => e.isIntersecting);
+      if (visible.length === 0) return;
+
+      // pick the entry with the largest intersectionRatio (most visible)
+      visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+      const topEntry = visible[0];
+      const id = topEntry.target.id;
+
+      // update mobile menu links
+      mobileLinks.forEach(link => {
+        const href = link.getAttribute("href");
+        if (!href) return;
+        if (href === `#${id}`) {
+          link.classList.add("text-indigo-400");
+        } else {
+          link.classList.remove("text-indigo-400");
+        }
+      });
+
+    }, options);
+
+    // observe each section
+    sections.forEach(s => observer.observe(s));
+  }
+
+  function enableScrollspyIfMobile() {
+    // disconnect if desktop
+    if (window.innerWidth > 768) {
+      if (observer) {
+        observer.disconnect();
+        observer = null;
+      }
+      // remove mobile-only active classes (so desktop is unaffected)
+      mobileLinks.forEach(link => link.classList.remove("text-indigo-400"));
+      return;
+    }
+
+    // create observer for mobile
+    createObserver();
+  }
+
+  // run on load
+  enableScrollspyIfMobile();
+
+  // handle resizes (debounced)
+  let resizeTimer;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(enableScrollspyIfMobile, 150);
+  });
+});
+</script>
+
 </html>
