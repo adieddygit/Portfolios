@@ -164,46 +164,84 @@
 
     <!-- Portfolio -->
     <section id="portfolio" class="px-16 py-20 bg-indigo-100">
-      <div >
-        <h2 class="text-3xl font-bold mb-6">My Works</h2>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold">Project 1</h3>
-            <p class="text-sm text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
-            </p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold">Project 2</h3>
-            <p class="text-sm text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
-            </p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold">Project 3</h3>
-            <p class="text-sm text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
-            </p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold">Project 4</h3>
-            <p class="text-sm text-gray-600">
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque asperiores harum, voluptas sed, voluptatem aperiam deleniti velit molestias nostrum in dignissimos blanditiis autem tempore temporibus consequuntur consequatur, neque voluptates laudantium!
-            </p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold">Project 5</h3>
-            <p class="text-sm text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem, modi perspiciatis molestias voluptatibus porro dolore doloremque non, laudantium voluptate dolorem reprehenderit cupiditate iure sint sit facere sunt impedit, possimus ipsum..
-            </p>
-          </div>
-          <div class="bg-white p-4 rounded shadow">
-            <h3 class="font-semibold">Project 6</h3>
-            <p class="text-sm text-gray-600">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor adipisci, ipsam officia maiores, enim numquam id, minima reiciendis et eligendi obcaecati sint unde eveniet velit soluta eum qui doloremque dolores?
-            </p>
-          </div>
+      <section class="bg-gray-100 py-12">
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Section Title -->
+    <h2 class="text-3xl font-bold mb-6">My Works</h2>
+
+    <!-- Works Grid -->
+    <div class="grid md:grid-cols-2 gap-8">
+      
+      <!-- 🔹 YouTube Project -->
+      <div class="p-4 rounded shadow bg-white">
+        <h3 class="font-semibold mb-2">EcoWatchGh</h3>
+        <div class="relative w-full aspect-video">
+          <iframe 
+            class="absolute inset-0 w-full h-full rounded-lg"
+            src="https://www.youtube.com/embed/7S-wbsM12TY" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+          </iframe>
         </div>
+      </div>
+
+      <!-- 🔹 Google Slides -->
+      <div class="p-4 rounded shadow bg-white">
+        <h3 class="font-semibold mb-2">Slide Deck</h3>
+        <div class="relative w-full aspect-video">
+          <iframe 
+            src="https://docs.google.com/presentation/d/1UxkIBZGtwpVvfD_RDQ8D7_N6_787G3Em7ZDxucPZiMY/embed?start=false&loop=false&delayms=3000"
+            class="absolute inset-0 w-full h-full rounded-lg"
+            frameborder="0" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+    <!-- GitHub Projects -->
+      
+      <!-- 🔹 GitHub Repo Card -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-lg font-semibold mb-2">Project Repo</h3>
+        <p class="text-gray-600 mb-4">
+          An awesome project built with HTML, CSS, and JavaScript.
+        </p>
+        <div class="flex items-center gap-3 mb-4">
+          <img src="https://img.shields.io/github/stars/username/project-name?style=social" alt="Stars">
+          <img src="https://img.shields.io/github/forks/username/project-name?style=social" alt="Forks">
+        </div>
+        <a href="https://github.com/username/project-name" 
+           target="_blank" 
+           class="inline-block bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800">
+          View on GitHub
+        </a>
+      </div>
+
+      <!-- 🔹 Live Demo Embed -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition">
+        <h3 class="text-lg font-semibold mb-2">Live Demo</h3>
+        <div class="relative w-full aspect-video rounded-lg overflow-hidden">
+          <iframe 
+            src="https://username.github.io/project-name/" 
+            class="absolute inset-0 w-full h-full border-0"
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+
+      <!-- 🔹 README Preview -->
+      <div class="bg-white p-6 rounded-xl shadow hover:shadow-lg transition md:col-span-2">
+        <h3 class="text-lg font-semibold mb-2">README Preview</h3>
+        <iframe 
+          src="https://github.com/username/project-name/blob/main/README.md" 
+          class="w-full h-[400px] rounded-lg border">
+        </iframe>
+      </div>
+  </div>
+</section>
+
     </section>
 
     <section id="services" class=" bg-blue-400 px-20 py-16">
