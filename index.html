@@ -393,7 +393,7 @@
 
     <!-- Social Links + Footer -->
     <footer class="bg-gray-900 py-12 px-6 sm:px-10 md:px-20 text-center">
-  <div class="text-indigo-500 mb-6">&copy; Copyright Emmanuadi 2025 | Designed by <span class="text-gray-200">Emmanuel Adi</span></div>
+  <div class="text-indigo-500 mb-6">&copy; Copyright Emmanuadi <span id="year"></span> | Designed by <span class="text-gray-200">Emmanuel Adi</span></div>
   <div class="flex justify-center space-x-4 text-2xl text-blue-400 transform transition duration-300 ease-in-out hover:translate-x-2">
     <a href="https://www.facebook.com/adieddygh"><i class="fa-brands fa-facebook"></i></a>
     <a href="https://twitter.com/@adieddy10"><i class="fa-brands fa-x-twitter"></i></a>
@@ -406,5 +406,8 @@
   </body>
 
   <script src="./Js/index.js"> </script>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear()
+  </script>
 
 </html>
